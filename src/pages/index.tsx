@@ -1,12 +1,20 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import NavBar from "../components/nav"
+import { Box, Typography } from "@mui/material"
+import Layout from "../layout/layout"
 
 
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <NavBar />
+    <Layout>
+        <Box>
+          <Typography variant="h1">
+            Home
+          </Typography>
+        </Box>
+    </Layout>
   )
 }
 
