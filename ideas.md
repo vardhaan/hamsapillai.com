@@ -1,0 +1,10 @@
+- Theme across website of "hole puncher." Similar to buttons in nav menu. Rationale: looks cool, feels like paper. Could extend so notes can be scribbled in the margins, GPT notes too.
+- About page contains area where user can ask about my background, such as "where did Hamsa grow up?" or "what's the most impressive thing in Hamsa's resume?". Could even have suggested queries.
+- fun game to incentivize people to ask questions about me
+    -- sorta like an interview
+    -- could even have an audio version
+- Notes that user takes can be stored in local storage and retrieved.
+- Easy porting of concepts / docs into user's notetaking tool.
+- Concept map across all posts.
+- RAG search across all pages and posts.
+- dynamic rendering of UI

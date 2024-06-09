@@ -7,6 +7,7 @@ import Layout from "../layout/layout";
 
 
 
+
 const BlogPage = (props: PageProps) => {
     return (
         <Layout>
