@@ -5,7 +5,7 @@ import FoundationIcon from '@mui/icons-material/Foundation';
 import { Link } from 'gatsby';
 import { ROUTES } from '../constants/routes';
 import styled from '@emotion/styled';
-import { DEPRESSED_BUTTON_STYLE } from '../constants/styles';
+import { DASHED_BORDER_COLOR, DEPRESSED_BUTTON_STYLE } from '../constants/styles';
 import { css } from '@emotion/react';
 
 
@@ -85,7 +85,7 @@ const HoverButton = styled(ButtonBase)<HoverButtonProps>(({selected}) => ({
         boxShadow: 'inset 0 3px 5px 1px rgba(0, 0, 0, 0.1)',
     },
     ...(selected && {
-        borderColor: '#959695',
+        borderColor: DASHED_BORDER_COLOR,
         borderWidth: 1,
         borderStyle: 'dashed',
     })

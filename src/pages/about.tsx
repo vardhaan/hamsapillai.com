@@ -1,16 +1,45 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Input, TextField, Typography } from "@mui/material";
 import { PageProps } from "gatsby";
 import * as React from "react"
 import NavBar from "../components/nav";
 import Layout from "../layout/layout";
 import Hamsa from "../images/hamsa.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { DASHED_BORDER_COLOR } from "../constants/styles";
+import { ChatMessage, useChatLLM } from "../lib/chat-llm";
+import { ChatCompletion, ChatCompletionMessage } from "openai/resources";
+import { RESUME_PROMPT } from "../constants/prompts/about";
 
 
 const AboutPage = (props: PageProps) => {
 
+    const [newInput, setNewInput] = useState<ChatMessage|null>(null)
+    const {messages, response, isLoading, error, sendNewMessages} = useChatLLM({
+        provider: "openai",
+        streamResponse: true
+    })
+
+    useEffect(() => {
+        console.log(response)
+    }, [response])
+
+    const sendAboutMessages = () => {
+        if (!newInput) return
+        if (messages.length === 0) {
+            sendNewMessages([{role: "system", content: RESUME_PROMPT}, newInput])
+        } else {
+            sendNewMessages([newInput])
+        }
+    }
+
     return (
         <Layout>
+            <TextField onChange={(e) => setNewInput({content: e.target.value, role: "user"})}>
+                What's your background?
+            </TextField>
+            <Button onClick={() => sendAboutMessages()}>
+                Submit
+            </Button>
             <Grid container
                 direction={"column"}
                 columnSpacing={2}
@@ -21,25 +50,10 @@ const AboutPage = (props: PageProps) => {
                     border: '1px solid red',
                 }}
             >
-                <Grid item
-                    sx={{
-                        width: "50%",
-                        border: '1px solid blue',
-                        paddingLeft: '0 !important',
-                        justifyContent: "center",
-                        alignItems: "center"
-                    }}
-                >
-                    <Box padding={0} sx={{ border: "1px solid green", m: 0, pl: 0 }}>
-                        Hello
-                    </Box>
-                </Grid>
                 <AboutItem>
                     <img src={Hamsa} 
                         style={{
-                            width: '100%',
-                            maxWidth: '100%',
-                            height: 'auto',
+                            width: "50%",
                             backgroundSize: 'contain',
                             overflow: 'hidden',
                             objectFit: 'contain'
@@ -47,10 +61,16 @@ const AboutPage = (props: PageProps) => {
                     />
                 </AboutItem>
                 <AboutItem>
-                    <Typography variant="h2" border="1px solid blue">Hello, I'm Hamsa.</Typography>
+                    <Typography variant="h2">
+                        Hello, I'm Hamsa.
+                    </Typography>
                 </AboutItem>
+                
 
             </Grid>
+            <Typography variant="h2">
+                {response}
+            </Typography>
         </Layout>
     )
 }
@@ -61,10 +81,11 @@ const AboutItem = ({ children }: { children: React.ReactNode }) => {
         <Grid item
             sx={{
                 width: '50%',
-                height: 'auto',
-                border: '1px solid red',
-                
+                height: 'auto',             
             }}
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
         >
             {children}
         </Grid>
