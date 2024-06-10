@@ -1,4 +1,7 @@
 import type { GatsbyConfig } from "gatsby"
+import OpenAI from "openai";
+
+
 
 const config: GatsbyConfig = {
   siteMetadata: {

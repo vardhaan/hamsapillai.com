@@ -8,3 +8,5 @@
 - Concept map across all posts.
 - RAG search across all pages and posts.
 - dynamic rendering of UI
+- all the accounts, blogs, books, etc. that have influenced me greatly
+- tell the user what files they can ask questions over per page. Or allow them to tag in new files at anytime (just like Copilot does)
